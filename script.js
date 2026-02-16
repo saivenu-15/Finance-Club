@@ -1,8 +1,8 @@
 script.js
 // Smooth scrolling for navigation links
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Navbar scroll effect
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function () {
         const navbar = document.querySelector('.custom-navbar');
         if (window.scrollY > 50) {
             navbar.style.background = 'rgba(15, 23, 42, 0.98)';
@@ -23,6 +23,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     behavior: 'smooth',
                     block: 'start'
                 });
+
+                // Close mobile menu if open
+                const navbarCollapse = document.querySelector('.navbar-collapse');
+                if (navbarCollapse.classList.contains('show')) {
+                    const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                        toggle: true
+                    });
+                    bsCollapse.hide();
+                }
             }
         });
     });
@@ -54,9 +63,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Contact form submission
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             // Get form data
             const formData = {
                 name: document.getElementById('name').value,
@@ -95,14 +104,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Button click effects
     document.querySelectorAll('.btn').forEach(button => {
-        button.addEventListener('click', function(e) {
+        button.addEventListener('click', function (e) {
             // Create ripple effect
             const rect = this.getBoundingClientRect();
             const ripple = document.createElement('span');
             const size = Math.max(rect.width, rect.height);
             const x = e.clientX - rect.left - size / 2;
             const y = e.clientY - rect.top - size / 2;
-            
+
             ripple.style.cssText = `
                 position: absolute;
                 width: ${size}px;
@@ -115,11 +124,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 animation: ripple 0.6s linear;
                 pointer-events: none;
             `;
-            
+
             this.style.position = 'relative';
             this.style.overflow = 'hidden';
             this.appendChild(ripple);
-            
+
             setTimeout(() => {
                 ripple.remove();
             }, 600);
@@ -133,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const target = parseInt(counter.getAttribute('data-count'));
             const increment = target / 50;
             let current = 0;
-            
+
             const timer = setInterval(() => {
                 current += increment;
                 if (current >= target) {
@@ -155,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('loading');
-                
+
                 // Trigger counter animation for stats
                 if (entry.target.querySelector('[data-count]')) {
                     animateCounters();
@@ -175,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const parallax = document.querySelector('.hero-background');
         if (parallax) {
             const speed = scrolled * 0.5;
-            parallax.style.transform = translateY(${speed}px);
+            parallax.style.transform = `translateY(${speed}px)`;
         }
     });
 
@@ -183,8 +192,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function animateGradients() {
         const gradientElements = document.querySelectorAll('.gradient-text');
         gradientElements.forEach((element, index) => {
-            element.style.animation = gradientShift 3s ease-in-out infinite;
-            element.style.animationDelay = ${index * 0.5}s;
+            element.style.animation = 'gradientShift 3s ease-in-out infinite';
+            element.style.animationDelay = `${index * 0.5}s`;
         });
     }
 
@@ -219,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function typeWriter(element, text, speed = 50) {
         let i = 0;
         element.innerHTML = '';
-        
+
         function type() {
             if (i < text.length) {
                 element.innerHTML += text.charAt(i);
@@ -227,23 +236,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(type, speed);
             }
         }
-        
+
         type();
     }
 
     // Easter egg: Konami code for special effect
     let konamiCode = [];
     const konamiPattern = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]; // Up Up Down Down Left Right Left Right B A
-    
-    document.addEventListener('keydown', function(e) {
+
+    document.addEventListener('keydown', function (e) {
         konamiCode.push(e.keyCode);
         konamiCode = konamiCode.slice(-10);
-        
+
         if (konamiCode.join(',') === konamiPattern.join(',')) {
             // Activate special effect
             document.body.style.animation = 'rainbow 2s ease-in-out';
             showAlert('🎉 Finance mode activated! Welcome to the secret trader\'s club!', 'success');
-            
+
             // Add rainbow animation
             const rainbowStyle = document.createElement('style');
             rainbowStyle.textContent = `
@@ -254,7 +263,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             `;
             document.head.appendChild(rainbowStyle);
-            
+
             setTimeout(() => {
                 document.body.style.animation = '';
             }, 2000);
@@ -266,7 +275,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function showAlert(message, type = 'info') {
     // Create alert element
     const alert = document.createElement('div');
-    alert.className = alert alert-${type} position-fixed;
+    alert.className = `alert alert-${type} position-fixed`;
     alert.style.cssText = `
         top: 20px;
         right: 20px;
@@ -276,11 +285,11 @@ function showAlert(message, type = 'info') {
         border-radius: 0.75rem;
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     `;
-    
-    const icon = type === 'success' ? 'fas fa-check-circle' : 
-                 type === 'error' ? 'fas fa-exclamation-circle' : 
-                 'fas fa-info-circle';
-    
+
+    const icon = type === 'success' ? 'fas fa-check-circle' :
+        type === 'error' ? 'fas fa-exclamation-circle' :
+            'fas fa-info-circle';
+
     alert.innerHTML = `
         <div class="d-flex align-items-center">
             <i class="${icon} me-2"></i>
@@ -288,9 +297,9 @@ function showAlert(message, type = 'info') {
             <button type="button" class="btn-close ms-auto" onclick="this.parentElement.parentElement.remove()"></button>
         </div>
     `;
-    
+
     document.body.appendChild(alert);
-    
+
     // Auto remove after 5 seconds
     setTimeout(() => {
         if (alert.parentElement) {
@@ -298,7 +307,7 @@ function showAlert(message, type = 'info') {
             setTimeout(() => alert.remove(), 300);
         }
     }, 5000);
-    
+
     // Add slide animations
     if (!document.querySelector('#alert-animations')) {
         const alertStyle = document.createElement('style');
@@ -360,7 +369,7 @@ function preloadImages() {
     const imageUrls = [
         'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'
     ];
-    
+
     imageUrls.forEach(url => {
         const img = new Image();
         img.src = url;

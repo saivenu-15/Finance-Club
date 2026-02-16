@@ -1,5 +1,4 @@
-style.css
-* {
+style.css * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -20,13 +19,13 @@ style.css
     --success: #22c55e;
     --warning: #f59e0b;
     --error: #ef4444;
-    
+
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, #10b981, #047857);
     --gradient-hero: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9));
     --gradient-card: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(51, 65, 85, 0.6));
     --gradient-accent: linear-gradient(135deg, #fbbf24, #f59e0b);
-    
+
     /* Shadows */
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -34,7 +33,7 @@ style.css
     --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
     --shadow-glow: 0 0 20px rgba(16, 185, 129, 0.3);
     --shadow-finance: 0 10px 40px rgba(16, 185, 129, 0.2);
-    
+
     /* Typography */
     --font-family: 'Inter', sans-serif;
     --font-size-xs: 0.75rem;
@@ -47,7 +46,7 @@ style.css
     --font-size-4xl: 2.25rem;
     --font-size-5xl: 3rem;
     --font-size-6xl: 3.75rem;
-    
+
     /* Spacing */
     --space-1: 0.25rem;
     --space-2: 0.5rem;
@@ -60,7 +59,7 @@ style.css
     --space-12: 3rem;
     --space-16: 4rem;
     --space-20: 5rem;
-    
+
     /* Border Radius */
     --radius-sm: 0.25rem;
     --radius-md: 0.375rem;
@@ -68,7 +67,7 @@ style.css
     --radius-xl: 0.75rem;
     --radius-2xl: 1rem;
     --radius-full: 9999px;
-    
+
     /* Transitions */
     --transition-fast: 150ms ease-out;
     --transition-base: 300ms ease-out;
@@ -80,6 +79,13 @@ body {
     background-color: var(--background);
     color: var(--text-primary);
     line-height: 1.6;
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+}
+
+html {
+    width: 100%;
     overflow-x: hidden;
 }
 
@@ -102,18 +108,40 @@ body {
 }
 
 /* Typography */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: var(--space-4);
 }
 
-h1 { font-size: var(--font-size-5xl); }
-h2 { font-size: var(--font-size-4xl); }
-h3 { font-size: var(--font-size-3xl); }
-h4 { font-size: var(--font-size-2xl); }
-h5 { font-size: var(--font-size-xl); }
-h6 { font-size: var(--font-size-lg); }
+h1 {
+    font-size: var(--font-size-5xl);
+}
+
+h2 {
+    font-size: var(--font-size-4xl);
+}
+
+h3 {
+    font-size: var(--font-size-3xl);
+}
+
+h4 {
+    font-size: var(--font-size-2xl);
+}
+
+h5 {
+    font-size: var(--font-size-xl);
+}
+
+h6 {
+    font-size: var(--font-size-lg);
+}
 
 p {
     margin-bottom: var(--space-4);
@@ -164,12 +192,51 @@ p {
     align-items: center;
 }
 
+/* Mobile Navigation Improvements */
+.navbar-toggler {
+    border: none;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+.navbar-collapse {
+    background: rgba(15, 23, 42, 0.98);
+    backdrop-filter: blur(15px);
+    border-radius: var(--radius-xl);
+    padding: var(--space-4);
+    margin-top: var(--space-2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media (min-width: 992px) {
+    .navbar-collapse {
+        background: transparent;
+        backdrop-filter: none;
+        padding: 0;
+        margin-top: 0;
+        border: none;
+    }
+}
+
 .mission-icon img {
-    height: 120px; /* Adjust the height of your logo as needed */
-    width: auto; /* Maintain aspect ratio */
-    margin-right: 12px; /* Add some space between the logo and the text */
-    border-radius: 50%; /* Makes the logo circular. Remove if your logo is square. */
-    border: 2px solid var(--primary-dark); /* Optional: Adds a subtle border */
+    height: 120px;
+    /* Adjust the height of your logo as needed */
+    width: auto;
+    /* Maintain aspect ratio */
+    margin-right: 12px;
+    /* Add some space between the logo and the text */
+    border-radius: 50%;
+    /* Makes the logo circular. Remove if your logo is square. */
+    border: 2px solid var(--primary-dark);
+    /* Optional: Adds a subtle border */
 }
 
 .navbar-brand:hover {
@@ -209,10 +276,14 @@ p {
 .hero-section {
     position: relative;
     min-height: 100vh;
+    min-height: 100dvh;
+    /* Mobile viewport height fix */
     display: flex;
     align-items: center;
     overflow: hidden;
     margin-top: 50px;
+    padding-top: 60px;
+    /* Prevent content hiding behind navbar on mobile */
 }
 
 .hero-background {
@@ -466,7 +537,8 @@ p {
 
 .activity-img {
     width: 100%;
-    height: 200px; /* A consistent height for single images */
+    height: 200px;
+    /* A consistent height for single images */
     object-fit: cover;
     border-radius: var(--radius-lg);
     margin: var(--space-4) 0;
@@ -475,21 +547,22 @@ p {
 /* Make images in the competitions card smaller */
 #competitions-div .activity-img {
     height: 110px;
-    margin-bottom: var(--space-3); /* Add space between the stacked images */
+    margin-bottom: var(--space-3);
+    /* Add space between the stacked images */
 }
 
-.research-img{
+.research-img {
     width: 300px;
     height: 400px;
     margin: 0;
 }
 
-.workshop-img{
+.workshop-img {
     width: 300px;
     height: 400px;
 }
 
-.competition-img{
+.competition-img {
     height: 250px !important;
     width: 300px !important;
 }
@@ -710,33 +783,75 @@ footer {
 
 /* Animations */
 @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
 }
 
 @keyframes glow {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.8; }
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
 }
 
 @keyframes bounce {
-    0%, 20%, 53%, 80%, 100% { transform: translateY(0px); }
-    40%, 43% { transform: translateY(-10px); }
-    70% { transform: translateY(-5px); }
-    90% { transform: translateY(-2px); }
+
+    0%,
+    20%,
+    53%,
+    80%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    40%,
+    43% {
+        transform: translateY(-10px);
+    }
+
+    70% {
+        transform: translateY(-5px);
+    }
+
+    90% {
+        transform: translateY(-2px);
+    }
 }
 
 @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 @keyframes pulse-glow {
-    0%, 100% { 
+
+    0%,
+    100% {
         box-shadow: 0 0 5px rgba(16, 185, 129, 0.5);
     }
-    50% { 
+
+    50% {
         box-shadow: 0 0 20px rgba(16, 185, 129, 0.8), 0 0 30px rgba(16, 185, 129, 0.4);
     }
 }
@@ -746,34 +861,34 @@ footer {
     .hero-title {
         font-size: var(--font-size-4xl);
     }
-    
+
     .hero-subtitle {
         font-size: var(--font-size-lg);
     }
-    
+
     .section-title {
         font-size: var(--font-size-3xl);
     }
-    
+
     .section-subtitle {
         font-size: var(--font-size-lg);
     }
-    
+
     .hero-buttons {
         flex-direction: column;
         align-items: center;
     }
-    
+
     .contact-info {
         flex-direction: column;
         align-items: center;
     }
-    
+
     .social-links {
         justify-content: center;
         margin-top: var(--space-4);
     }
-    
+
     .mission-card,
     .feature-card,
     .objective-card,
@@ -788,15 +903,41 @@ footer {
     .container {
         padding: 0 var(--space-4);
     }
-    
+
+    .hero-title {
+        font-size: 2.5rem;
+        /* Better fit for small mobile */
+    }
+
     .hero-content {
         text-align: center;
+        padding: var(--space-10) 0;
     }
-    
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    /* Adjust padding for sections on mobile */
+    section {
+        padding-top: var(--space-10) !important;
+        padding-bottom: var(--space-10) !important;
+    }
+
     .mission-card {
         padding: var(--space-6);
     }
-    
+
+    /* Fix image overflow on mobile */
+    .research-img,
+    .workshop-img,
+    .competition-img {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 100%;
+        margin: 0 auto var(--space-4);
+    }
+
     .feature-card,
     .objective-card,
     .concept-card,
@@ -804,9 +945,31 @@ footer {
     .event-card {
         padding: var(--space-6);
     }
-    
+
     .contact-card {
-        padding: var(--space-8);
+        padding: var(--space-6);
+    }
+
+    /* Prevent overflow on small screens */
+    .hero-title,
+    .section-title,
+    h1,
+    h2,
+    h3 {
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        hyphens: auto;
+    }
+
+    .feature-card,
+    .objective-card,
+    .activity-card,
+    .event-card,
+    .game-card {
+        width: 100%;
+        /* Ensure cards don't exceed container */
+        margin-left: 0;
+        margin-right: 0;
     }
 }
 
@@ -827,8 +990,15 @@ html {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Badge Styles */
@@ -903,7 +1073,7 @@ html {
 
 .games-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: var(--space-8);
 }
 
@@ -949,9 +1119,15 @@ html {
 }
 
 .club-members-img .img {
-    width: 70vw;
-    height: 80vh;
-    margin: 0;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    margin: 0 auto;
+    display: block;
 }
 
 .club-members-img {
